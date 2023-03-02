@@ -1,0 +1,13 @@
+{
+  "name": "subscription_service",
+  "version": "1.0.0",
+  "description": "private_subscription_service",
+  "author": "Adolfo Fuentes",
+  "license": "ISC",
+  "scripts": {
+    "start": "node inde.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

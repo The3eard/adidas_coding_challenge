@@ -1,0 +1,17 @@
+{
+  "name": "adidas_coding_challenge",
+  "version": "1.0.0",
+  "description": "NodeJS Coding challenge from Adidas",
+  "scripts": {
+    "start": "concurrently -n \"public_service,subscription_service,email_service\" -c \"red,green,blue\" \"npm run public_service\" \"npm run subscription_service\" \"npm run email_service\"",
+    "public_service": "nodemon .\\public_service\\index.js",
+    "subscription_service": "nodemon .\\subscription_service\\index.js",
+    "email_service": "nodemon .\\email_service\\index.js"
+  },
+  "author": "Adolfo Fuentes",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.21"
+  }
+}

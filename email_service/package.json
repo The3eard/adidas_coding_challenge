@@ -1,0 +1,13 @@
+{
+  "name": "email_service",
+  "version": "1.0.0",
+  "description": "Private email service",
+  "author": "Adolfo Fuentes",
+  "license": "ISC",
+  "scripts": {
+    "start": "node inde.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
