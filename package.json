@@ -4,9 +4,9 @@
   "description": "NodeJS Coding challenge from Adidas",
   "scripts": {
     "start": "concurrently -n \"public_service,subscription_service,email_service,database\" -c \"red,green,blue,yellow\" \"npm run public_service\" \"npm run subscription_service\" \"npm run email_service\" \"npm run database\"",
-    "public_service": "nodemon .\\public_service\\index.js",
-    "subscription_service": "nodemon .\\subscription_service\\index.js",
-    "email_service": "nodemon .\\email_service\\index.js",
+    "public_service": "nodemon .\\public_service\\index.js --ignore ./db/db.json",
+    "subscription_service": "nodemon .\\subscription_service\\index.js --ignore ./db/db.json",
+    "email_service": "nodemon .\\email_service\\index.js --ignore ./db/db.json",
     "database": "json-server --watch ./db/db.json"
   },
   "author": "Adolfo Fuentes",
