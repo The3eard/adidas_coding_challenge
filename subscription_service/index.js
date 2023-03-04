@@ -28,7 +28,7 @@ app.post(
     await users.find_user(req.body.mail).then((data) => (user = data));
     if (user == null) {
       await users.create_user(req, res).then((data) => (newUser = data));
-      res.send(newUser);
-    } else res.send(`User ${user.mail} already exists`);
+      res.status(201).send(newUser);
+    } else res.status(409).send(`User ${user.mail} already exists`);
   },
 );

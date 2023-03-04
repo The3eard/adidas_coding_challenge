@@ -2,48 +2,8 @@
   "users": [
     {
       "id": 1,
-      "user": "user1",
-      "mail": "user1@mail.com"
-    },
-    {
-      "id": 2,
-      "user": "user2",
-      "mail": "user2@mail.com"
-    },
-    {
-      "id": 3,
-      "user": "user3",
-      "mail": "user3@mail.com"
-    },
-    {
-      "id": 4,
-      "user": "user4",
-      "mail": "user4@mail.com"
-    },
-    {
-      "id": 5,
-      "user": "user5",
-      "mail": "user5@mail.com"
-    },
-    {
-      "id": 6,
-      "user": "user6",
-      "mail": "user6@mail.com"
-    },
-    {
-      "id": 7,
-      "user": "user6",
-      "mail": "user7@mail.com"
-    },
-    {
-      "user": "user6",
-      "mail": "user7@mail.com",
-      "id": 8
-    },
-    {
-      "user": "test",
-      "mail": "test@mail.com",
-      "id": 9
+      "user": "sample_user",
+      "mail": "sample@mail.com"
     }
   ]
 }
