@@ -17,13 +17,15 @@ exports.post = (req, res, token) => {
     },
   };
   const request = http.request(options, (requestResponse) => {
-    if (requestResponse.statusCode === 200) {
+    if (requestResponse.statusCode === 201) {
       console.log(`${req.body.user} registered in mail subscription`);
       res.status(200).send(`${req.body.user} registered in mail subscription`);
     }
     if (requestResponse.statusCode === 409) {
       console.log(`${req.body.user} already registered in mail subscription`);
-      res.status(409).send(`${req.body.user} registered in mail subscription`);
+      res
+        .status(409)
+        .send(`${req.body.user} already registered in mail subscription`);
     }
     if (requestResponse.statusCode === 401) {
       console.log('Token expired');
