@@ -1,9 +1,13 @@
 {
   "users": [
     {
-      "id": 1,
-      "user": "sample_user",
-      "mail": "sample@mail.com"
+      "email": "name_surname@mail.com",
+      "firstName": "Name",
+      "gender": "neuter",
+      "dateOfBirth": "01/01/1900",
+      "consent": true,
+      "newsletterId": 1,
+      "id": 1
     }
   ]
 }
