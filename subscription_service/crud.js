@@ -1,9 +1,12 @@
-require('dotenv').config({path: __dirname + '/../.env'});
+require('dotenv').config({path: __dirname + '/.env'});
 
 const events = require('events');
+const {response} = require('express');
 const http = require('node:http');
 
-exports.create_user = (req, res) => {
+exports.userEvent = new events.EventEmitter();
+
+exports.create_user = (req, res, token) => {
   return (promise = new Promise((resolve, reject) => {
     const body = JSON.stringify({
       email: req.body.email,
@@ -13,6 +16,7 @@ exports.create_user = (req, res) => {
       consent: req.body.consent,
       newsletterId: req.body.newsletterId,
     });
+
     const options = {
       hostname: 'localhost',
       port: process.env.DATABASE_PORT,
@@ -23,23 +27,22 @@ exports.create_user = (req, res) => {
         'Content-Length': Buffer.byteLength(body),
       },
     };
-    const request = http.request(options, (requestResponse) => {
-      if (requestResponse.statusCode === 201) {
-        console.log(`${req.body.email} created`);
-        resolve(req.body.email);
-      }
-      requestResponse.setEncoding('utf8');
-    });
-    request.on('error', (e) => {
-      console.error(`Cannot create user`);
-    });
-    request.write(body);
 
-    request.end();
+    http
+      .request(options, (res) => {
+        if (response.statusCode == 200) sendMail(body, token);
+        let data = '';
+        res.on('data', (d) => {
+          data += d;
+        });
+        res.on('end', () => {
+          resolve(JSON.parse(data));
+        });
+      })
+      .on('error', console.error)
+      .end(body);
   }));
 };
-
-exports.userEvent = new events.EventEmitter();
 
 exports.find_user = (mail) => {
   return (promise = new Promise((resolve, reject) => {
@@ -65,6 +68,7 @@ exports.delete_user = (req, res, id) => {
     const body = JSON.stringify({
       id: id,
     });
+
     const options = {
       hostname: 'localhost',
       port: process.env.DATABASE_PORT,
@@ -75,19 +79,16 @@ exports.delete_user = (req, res, id) => {
         'Content-Length': Buffer.byteLength(body),
       },
     };
-    const request = http.request(options, (requestResponse) => {
-      if (requestResponse.statusCode === 200) {
-        console.log(`${req.body.email} deleted`);
-        resolve(req.body.mail);
-      }
-      requestResponse.setEncoding('utf8');
-    });
-    request.on('error', (e) => {
-      console.error(`Cannot create user`);
-    });
-    request.write(body);
 
-    request.end();
+    http
+      .request(options, (res) => {
+        res.on('data', () => {});
+        res.on('end', () => {
+          resolve(`User ${req.body.email} deleted`);
+        });
+      })
+      .on('error', console.error)
+      .end(body);
   }));
 };
 
@@ -108,4 +109,28 @@ exports.find_all = () => {
         console.error(`Got error: ${e.message}`);
       });
   }));
+};
+
+sendMail = (body, token) => {
+  const options = {
+    hostname: 'localhost',
+    port: process.env.EMAIL_SERVER_PORT,
+    path: '/send_mail',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Content-Length': Buffer.byteLength(body),
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  http
+    .request(options, (res) => {
+      res.on('data', (d) => {});
+      res.on('end', () => {
+        console.log('Sending email');
+      });
+    })
+    .on('error', console.error)
+    .end(body);
 };

@@ -1,14 +1,13 @@
-require('dotenv').config({path: __dirname + '/../.env'});
+require('dotenv').config({path: __dirname + '/.env'});
 
 const express = require('express');
 const cors = require('cors');
-const apphttp = require('node:http');
+const http = require('node:http');
 
 const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PUBLIC_SERVER_PORT;
-const service = require('../security/service');
-const http = require('./http');
+const service = require('./security/service');
 
 let token;
 
@@ -37,7 +36,39 @@ app.post('/subscribe', (req, res) => {
     req.body.newsletterId != undefined &&
     req.body.consent
   ) {
-    http.post(req, res, '/create_subscription', token);
+    let body = {
+      email: req.body.email,
+      firstName: req.body.firstName,
+      gender: req.body.gender,
+      dateOfBirth: req.body.dateOfBirth,
+      consent: req.body.consent,
+      newsletterId: req.body.newsletterId,
+      id: req.body.id,
+    };
+    body = JSON.stringify(body);
+    const options = {
+      hostname: 'localhost',
+      port: process.env.SUBS_SERVER_PORT,
+      path: '/create_subscription',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(body),
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    http
+      .request(options, (response) => {
+        let data = '';
+        response.on('data', (d) => {
+          data += d;
+        });
+        response.on('end', () => {
+          res.send(JSON.parse(data));
+        });
+      })
+      .on('error', console.error)
+      .end(body);
   } else {
     res.status(206).send({
       msg: 'To subscribe you need email, date of birth, newsLetter id and accept the consent',
@@ -47,7 +78,40 @@ app.post('/subscribe', (req, res) => {
 
 app.post('/unsubscribe', (req, res) => {
   if (req.body.email != undefined) {
-    http.post(req, res, '/delete_subscription', token);
+    let body = {
+      email: req.body.email,
+      firstName: req.body.firstName,
+      gender: req.body.gender,
+      dateOfBirth: req.body.dateOfBirth,
+      consent: req.body.consent,
+      newsletterId: req.body.newsletterId,
+      id: req.body.id,
+    };
+    body = JSON.stringify(body);
+    const options = {
+      hostname: 'localhost',
+      port: process.env.SUBS_SERVER_PORT,
+      path: '/delete_subscription',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(body),
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    http
+      .request(options, (response) => {
+        let data = '';
+        response.on('data', (d) => {
+          data += d;
+        });
+        response.on('end', () => {
+          console.log('DELETE', data);
+          res.send(data);
+        });
+      })
+      .on('error', console.error)
+      .end(body);
   } else {
     res.status(200).send({msg: 'Need ID to delete subscription'});
   }
@@ -66,7 +130,7 @@ app.get('/get_subscription', (req, res) => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const request = apphttp.get(options, (response) => {
+    const request = http.get(options, (response) => {
       response.on('data', (chunk) => {
         const jsonString = Buffer.from(chunk).toString('utf8');
         const parsedData = JSON.parse(jsonString);
@@ -88,7 +152,7 @@ app.get('/get_all_subscriptions', (req, res) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  const request = apphttp.get(options, (response) => {
+  const request = http.get(options, (response) => {
     response.on('data', (chunk) => {
       const jsonString = Buffer.from(chunk).toString('utf8');
       const parsedData = JSON.parse(jsonString);

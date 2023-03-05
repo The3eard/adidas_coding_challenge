@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "email": "adolfo@mail.com",
+      "firstName": "Adolfo",
+      "gender": "masculine",
+      "dateOfBirth": "01/01/1900",
+      "consent": true,
+      "newsletterId": 1,
+      "id": 1
+    },
+    {
+      "email": "andrea@mail.com",
+      "firstName": "Andrea",
+      "gender": "femenine",
+      "dateOfBirth": "01/01/1900",
+      "consent": true,
+      "newsletterId": 1,
+      "id": 2
+    }
+  ]
+}

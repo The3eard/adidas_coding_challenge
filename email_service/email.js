@@ -1,7 +1,7 @@
 // Use at least Nodemailer v4.1.0
 const nodemailer = require('nodemailer');
 
-exports.send = (mail) => {
+exports.send = (body) => {
   // Generate SMTP service account from ethereal.email
   nodemailer.createTestAccount((err, account) => {
     if (err) {
@@ -24,11 +24,10 @@ exports.send = (mail) => {
 
     // Message object
     const message = {
-      from: 'Sender Name <sender@example.com>',
-      to: mail,
-      subject: 'Nodemailer is unicode friendly ✔',
-      text: 'Hello to myself!',
-      html: '<p><b>Hello</b> to myself!</p>',
+      from: 'Adidas newsletter subscription <newsletter@adidas.com>',
+      to: `${body.firstName} <${body.email}>`,
+      subject: 'Welcome to adidas newsletter',
+      text: `Hello ${body.firstName}! Welcome to Adidas newsletter!`,
     };
 
     transporter.sendMail(message, (err, info) => {

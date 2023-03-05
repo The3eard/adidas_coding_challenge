@@ -33,11 +33,13 @@ exports.authorization = (username, pass, service, port) => {
     });
   });
   req.on('error', (e) => {
-    console.error(`Cannot auth ${username} in ${service}: ${e.message}`);
+    console.error(
+      `Cannot auth ${username} in ${service}: ${e.message} - Retry...`,
+    );
     retry = setInterval(() => {
       clearInterval(retry);
       this.authorization(username, pass, service, port);
-    }, 5000);
+    }, 3000);
   });
   req.write(postData);
   req.end();
