@@ -2,7 +2,7 @@
 
 ### Paste in terminal:
 
-`docker build . -t adidas/subs-micro; docker run --network="host" -p 3002:3002 -p 3000:3000 -d adidas/subs-micro;`
+`docker build . -t subs-micro; docker run --network="host" -p 3002:3002 -p 3000:3000 -d subs-micro;`
 
 ### INFO
 

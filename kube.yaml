@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: adidas-pod
+spec:
+  hostNetwork: true
+  containers:
+    - name: email-pod
+      image: adolfofuentes/email-micro
+      ports:
+        - containerPort: 3003
+    - name: subs-pod
+      image: adolfofuentes/subs-micro
+      ports:
+        - containerPort: 3002
+        - containerPort: 3000
+    - name: public-pod
+      image: adolfofuentes/public-micro
+      ports:
+        - containerPort: 3001

@@ -2,7 +2,7 @@
 
 ### Paste in terminal:
 
-`docker build . -t adidas/email-micro; docker run --network="host" -p 3003:3003 -d adidas/email-micro;`
+`docker build . -t email-micro; docker run --network="host" -p 3003:3003 -d email-micro;`
 
 ### INFO
 

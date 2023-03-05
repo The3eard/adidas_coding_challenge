@@ -2,7 +2,7 @@
 
 ### Paste in terminal:
 
-`docker build . -t adidas/public-micro; docker run --network="host" -p 3001:3001 -d adidas/public-micro;`
+`docker build . -t public-micro; docker run --network="host" -p 3001:3001 -d public-micro;`
 
 ### INFO
 
