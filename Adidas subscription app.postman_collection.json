@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "08a40a33-319b-4bdb-aed7-a4aaa4394282",
+		"_postman_id": "953597b5-361f-4803-9f82-89539a293177",
 		"name": "Adidas subscription app",
 		"description": "Collection to test endpoint of the adidas subscription app",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -41,7 +41,7 @@
 						"subscribe"
 					]
 				},
-				"description": "Endpoint to subscribe. The response is a message with the subscription id.  \nAll fields are required except gender and name. Acceptance of consent is mandatory.\n\nReturns the subscription data."
+				"description": "Endpoint to subscribe. The response is a message with the subscription id.  \nAll fields are required except gender and name. Acceptance of consent is mandatory.\n\nThe user receive a welcome email.\n\nReturns the subscription data."
 			},
 			"response": []
 		},
@@ -186,7 +186,7 @@
 						"unsubscribe"
 					]
 				},
-				"description": "Delete a subscription by searching by email.\n\nReturns a message with the result."
+				"description": "Delete a subscription by searching by email.\n\nThe user receive a goodbye email.\n\nReturns a message with the result."
 			},
 			"response": []
 		},

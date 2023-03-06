@@ -9,7 +9,7 @@
 - Connections are protected user-facing and between microservices
 - To simplify the application, the HTTPS protocol has not been used, although mTLS should ideally be used for connections.
 - I have used nodemon and concurrently dependencies to run the application easily, as well as jsonserver as a persistent database.
-- I use nodemon and concurrently to run it
+- I have used nodemailer with ethereal to simulate sending emails. When you create or delete a subscription you will see a link to check the email.
 - You have a CI/CD diagram is attached in the root of the project.
 - Due to lack of time, I have not done unit tests.
 
@@ -19,7 +19,6 @@
 
 - ### Locally with node.js
   - Yon need nodejs and npm to run the application.
-  - I use nodemon and concurrently to run it
   - Run `npm run custom_install` to install all the dependencies.
   - Run `npm start` to run all microservices.
   - You can run `npm install` and `npm start` on each microservice to run them independently.

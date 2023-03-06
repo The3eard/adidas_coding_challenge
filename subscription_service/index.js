@@ -52,7 +52,9 @@ app.post(
     await users.find_user(req.body.email).then((data) => (user = data));
     if (user != null) {
       let msg;
-      await users.delete_user(req, res, user.id).then((data) => (msg = data));
+      await users
+        .delete_user(req, res, user, token)
+        .then((data) => (msg = data));
       res.send(msg);
     } else res.status(409).send({msg: `User doesn't exists`});
   },

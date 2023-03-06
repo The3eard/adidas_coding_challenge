@@ -26,8 +26,12 @@ exports.send = (body) => {
     const message = {
       from: 'Adidas newsletter subscription <newsletter@adidas.com>',
       to: `${body.firstName} <${body.email}>`,
-      subject: 'Welcome to adidas newsletter',
-      text: `Hello ${body.firstName}! Welcome to Adidas newsletter!`,
+      subject: body.subscribe
+        ? 'Welcome to Adidas newsletter'
+        : 'Goodbye from Adidas newsletter',
+      text: body.subscribe
+        ? `Hello ${body.firstName}! Welcome to Adidas newsletter!`
+        : `Goodbye ${body.firstName}! See you soon!`,
     };
 
     transporter.sendMail(message, (err, info) => {

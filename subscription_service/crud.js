@@ -15,6 +15,7 @@ exports.create_user = (req, res, token) => {
       dateOfBirth: req.body.dateOfBirth,
       consent: req.body.consent,
       newsletterId: req.body.newsletterId,
+      subscribe: true,
     });
 
     const options = {
@@ -63,16 +64,23 @@ exports.find_user = (mail) => {
   }));
 };
 
-exports.delete_user = (req, res, id) => {
+exports.delete_user = (req, res, user, token) => {
   return (promise = new Promise((resolve, reject) => {
     const body = JSON.stringify({
-      id: id,
+      email: user.email,
+      firstName: user.email,
+      gender: user.email,
+      dateOfBirth: user.email,
+      consent: user.consent,
+      newsletterId: user.newsletterId,
+      id: user.id,
+      subscribe: false,
     });
 
     const options = {
       hostname: 'localhost',
       port: process.env.DATABASE_PORT,
-      path: `/users/${id}`,
+      path: `/users/${user.id}`,
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -82,6 +90,7 @@ exports.delete_user = (req, res, id) => {
 
     http
       .request(options, (res) => {
+        if (response.statusCode == 200) sendMail(body, token);
         res.on('data', () => {});
         res.on('end', () => {
           resolve(`User ${req.body.email} deleted`);
