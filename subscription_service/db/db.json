@@ -17,6 +17,15 @@
       "consent": true,
       "newsletterId": 1,
       "id": 2
+    },
+    {
+      "email": "sample_mail@mail.com",
+      "firstName": "SampleName",
+      "gender": "neuter",
+      "dateOfBirth": "01/01/1900",
+      "consent": true,
+      "newsletterId": 1,
+      "id": 3
     }
   ]
 }

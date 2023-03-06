@@ -7,7 +7,8 @@
     "public_service": "nodemon .\\public_service\\index.js --ignore ./db/db.json",
     "subscription_service": "nodemon .\\subscription_service\\index.js --ignore ./db/db.json",
     "email_service": "nodemon .\\email_service\\index.js --ignore ./db/db.json",
-    "database": "json-server --watch ./subscription_service/db/db.json"
+    "database": "json-server --watch ./subscription_service/db/db.json",
+    "custom_install": "npm install && cd ./email_service && npm install && cd ../public_service && npm install && cd ../subscription_service && npm install"
   },
   "author": "Adolfo Fuentes",
   "license": "ISC",
