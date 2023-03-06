@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "08a40a33-319b-4bdb-aed7-a4aaa4394282",
+		"name": "Adidas subscription app",
+		"description": "Collection to test endpoint of the adidas subscription app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11068538"
+	},
+	"item": [
+		{
+			"name": "Create subscription",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwdWJsaWNfc2VydmljZSIsImlhdCI6MTY3Nzk1MzU4NSwiZXhwIjoxNjc5MTYzMTg1fQ.tD8uZqOEnbTo-HVxrDnSWHa7COEBt6yg3ZcmWQYp-80",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"sample_mail@mail.com\",\r\n    \"firstName\": \"SampleName\",\r\n    \"gender\": \"neuter\",\r\n    \"dateOfBirth\": \"01/01/1900\",\r\n    \"consent\": true,\r\n    \"newsletterId\": 1\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/subscribe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"subscribe"
+					]
+				},
+				"description": "Endpoint to subscribe. The response is a message with the subscription id.  \nAll fields are required except gender and name. Acceptance of consent is mandatory.\n\nReturns the subscription data."
+			},
+			"response": []
+		},
+		{
+			"name": "Find susbcription",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3001/get_subscription?email=sample_mail@mail.com",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"get_subscription"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "sample_mail@mail.com"
+						}
+					]
+				},
+				"description": "Searches for a subscription by searching by email.\n\nReturns the subscription data."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete subscription",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwdWJsaWNfc2VydmljZSIsImlhdCI6MTY3Nzk1MzU4NSwiZXhwIjoxNjc5MTYzMTg1fQ.tD8uZqOEnbTo-HVxrDnSWHa7COEBt6yg3ZcmWQYp-80",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"sample_mail@mail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/unsubscribe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"unsubscribe"
+					]
+				},
+				"description": "Delete a subscription by searching by email.\n\nReturns a message with the result."
+			},
+			"response": []
+		},
+		{
+			"name": "Find all susbcriptions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3001/get_all_subscriptions",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"get_all_subscriptions"
+					]
+				},
+				"description": "Returns all the subscriptions"
+			},
+			"response": []
+		}
+	]
+}

@@ -7,12 +7,13 @@
     "public_service": "nodemon .\\public_service\\index.js --ignore ./db/db.json",
     "subscription_service": "nodemon .\\subscription_service\\index.js --ignore ./db/db.json",
     "email_service": "nodemon .\\email_service\\index.js --ignore ./db/db.json",
-    "database": "json-server --watch ./db/db.json"
+    "database": "json-server --watch ./subscription_service/db/db.json"
   },
   "author": "Adolfo Fuentes",
   "license": "ISC",
   "dependencies": {
     "concurrently": "^7.6.0",
-    "nodemon": "^2.0.21"
+    "nodemon": "^2.0.21",
+    "json-server": "^0.17.2"
   }
 }
